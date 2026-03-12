@@ -48,6 +48,10 @@ Claude Code 上で `/prompt-review` を実行する。
 
 ※ シークレット警告セクションはクレデンシャル検出時のみ出力
 
+## サンプルレポート
+
+実際の出力例は [こちらのGist](https://gist.github.com/tokoroten/07398032d25a8f82f6452309ca402bff) を参照。
+
 ## ファイル構成
 
 ```
