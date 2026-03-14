@@ -727,9 +727,9 @@ def collect_gemini_cli(cutoff_ms: int | None, project_filter: str | None) -> dic
 
                             # メッセージ単位のタイムスタンプ（ISO 8601）を優先
                             msg_ts_str = msg.get("timestamp", "")
-                            ts_ms = iso_to_ms(msg_ts_str) if msg_ts_str else session_start_ms or file_mtime_ms
+                            ts_ms = (iso_to_ms(msg_ts_str) if msg_ts_str else None) or session_start_ms or file_mtime_ms
 
-                            if cutoff_ms and ts_ms and ts_ms < cutoff_ms:
+                            if cutoff_ms and ts_ms < cutoff_ms:
                                 continue
 
                             content = msg.get("content", [])
@@ -770,6 +770,7 @@ def collect_gemini_cli(cutoff_ms: int | None, project_filter: str | None) -> dic
 
                     elif isinstance(data, list):
                         # 旧形式（手動保存チェックポイント）: [{role, parts}]
+                        msg_count = 0
                         for msg in data:
                             if not isinstance(msg, dict):
                                 continue
@@ -789,6 +790,9 @@ def collect_gemini_cli(cutoff_ms: int | None, project_filter: str | None) -> dic
                                     "timestamp_ms": file_mtime_ms,
                                     "project": project_name,
                                 })
+                                msg_count += 1
+                                if msg_count >= 100:
+                                    break
 
             except (OSError, UnicodeDecodeError, json.JSONDecodeError):
                 continue

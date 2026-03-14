@@ -26,7 +26,7 @@ context: fork
 ## ステップ1: データ収集（スクリプト実行）
 
 前処理スクリプト [scripts/collect.py](scripts/collect.py) を実行してデータを収集する。
-このスクリプトは Claude Code, GitHub Copilot Chat, Cursor, Cline, Roo Code, Windsurf, Antigravity, OpenCode の
+このスクリプトは Claude Code, GitHub Copilot Chat, Cursor, Cline, Roo Code, Windsurf, Antigravity, Gemini CLI, OpenAI Codex, OpenCode の
 ログを自動検出し、フィルタ済みのJSON を標準出力に返す。
 
 ### 引数からスクリプトオプションを組み立てる
